@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>All my Users</h1>
+    <div id="user_table">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th> Last Name</th>
+                <th>Age</th>
+            </tr>
+            {% for user in all_users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.age}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <h1>Add a User</h1>
+    <div>
+        <form action="/process_form" method="POST">
+            {% csrf_token%}
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" id="first_name">
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" id="last_name">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email"> 
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age">
+            <input type="submit" name="submit" id="submit">
+        </form>
+    </div>
 </body>
 </html>
